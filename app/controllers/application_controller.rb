@@ -5,14 +5,14 @@ class ApplicationController < Sinatra::Base
     enable :sessions unless test?
     set :session_secret, "secret"
   end
-  
+
   get '/' do
     erb :index
   end
-  
+
   post '/login' do
     @user = User.find_by(username: params["username"])
-    
+
     if @user.nil?
       erb :error
     else
@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
       redirect to '/account'
     end
   end
-  
+
   get '/account' do
     if @user = Helpers.current_user(session)
       erb :account
@@ -29,9 +29,9 @@ class ApplicationController < Sinatra::Base
     end
   end
   get '/logout' do
-    
-    
+
+
   end
-  
-  
+
+
 end
