@@ -10,11 +10,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  # get '/login' do
-  #
-  #   erb :account
-  # end
-
   post '/login' do
     @user = User.find_by(username: params["username"])
     if @user.nil?
@@ -26,16 +21,14 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/account' do
-    @user = Helpers.current_user(session)
+    if @user = Helpers.current_user(session)
     erb :account
+  else
+    erb :error
   end
 
   get '/logout' do
-    if Helper.is_logged_in?(session)
-      erb :account
-    else
-      erb :index
-    end
+    
 
   end
 
