@@ -30,7 +30,7 @@ class ApplicationController < Sinatra::Base
   end
   get '/logout' do
 
-    @user = Helpers.is_logged_in?(session)
+    Helpers.is_logged_in?(session)
 
   end
 
